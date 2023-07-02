@@ -1,3 +1,3 @@
 # Logistic Regression
 
-## Membuat Program Meprediksi Apakah Orang Tersebut akan Membeli Mobil tidak
+## Membuat Program Meprediksi Apakah Orang tersebut bisa Membeli Mobil atau tidak
