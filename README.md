@@ -11,3 +11,8 @@ aktifkan Virtual Environment:
 ```
 source env/bin/activate
 ```
+
+### Run Program
+```
+python3 main2.py
+```
