@@ -1,6 +1,7 @@
 import sklearn.linear_model as lm
 import pandas as pd
 import sklearn.model_selection as ms
+import numpy as np
 
 data = pd.read_csv("calonpembeli_ch5.csv")
 
@@ -14,6 +15,11 @@ y = data[["Beli_Mobil"]]
 X_train, X_test, y_train, y_test = ms.train_test_split(X,y, test_size=0.2, random_state=0)
 
 
+# flatten
+y_train = np.array(y_train).flatten()
+y_test = np.array(y_test).flatten()
+
+
 # Bikin sebuah model dengan logistic regresion
 model = lm.LogisticRegression(solver="lbfgs")
 model.fit(X_train, y_train)
@@ -24,7 +30,8 @@ model.fit(X_train, y_train)
 
 
 # Memprediksi data
-y_prediksi = model.predict([[32,1,0,0,240]])
+y_prediksi = model.predict(X_test)
+# print(X_test.shape)
 # print(y_prediksi)
 
 # Melihat akurasi model dari data
@@ -33,9 +40,9 @@ akurasi_model = model.score(X_test, y_test)
 
 # print(data.describe())
 
-print("=========================================================")
+print(60 * "=")
 print("MEMPREDIKSI APAKAH ORANG TERSEBUT AKAN BISA MEMBELI MOBIL")
-print("=========================================================")
+print(60 * "=")
 
 loop = True
 Usia = []
@@ -61,27 +68,35 @@ while loop:
         print("yang anda masukan bukan angka")
         break
 
-Usia = pd.DataFrame(Usia, columns=["Usia"])
-Status = pd.DataFrame(Status, columns=["Status"])
-Kelamin = pd.DataFrame(Kelamin, columns=["Kelamin"])
-JumlahMobil = pd.DataFrame(JumlahMobil, columns=["JumlahMobil"])
-Penghasilan = pd.DataFrame(Penghasilan, columns=["Penghasilan"])
-
-data1 = pd.DataFrame.join(Usia, Status)
-data2 = pd.DataFrame.join(Kelamin, JumlahMobil)
-data3 = pd.DataFrame.join(data1, data2)
-
 
 # Menggabungkan data yang telah di isi
-dataLengkap = pd.DataFrame.join(data3, Penghasilan)
-# print(dataLengkap)
+dataLenkap = {
+    "Usia": Usia,
+    "Status": Status,
+    "Kelamin": Kelamin,
+    "Memiliki_Mobil": JumlahMobil,
+    "Penghasilan": Penghasilan
+}
+
+dataLenkap = pd.DataFrame(dataLenkap)
+print()
+print()
+print(60 * "=")
+print("Daftar Data yang Sudah di Isi")
+print(60 * "=")
+print(dataLenkap)
+# print(dataLenkap.shape)
+# print(type(X_test))
+# print(type(dataLenkap))
 
 
 # Memprediksi sebuah data
-prediksi = model.predict(dataLengkap)
-print("=====================")
+prediksi = model.predict(dataLenkap)
+# print(prediksi)
+print()
+print(50 * "=")
 print("Hasil Prediksi")
-print("=====================")
+print(50 * "=")
 if prediksi == 1:
     print("Orang tersebut akan beli mobil")
 else:
