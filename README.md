@@ -11,6 +11,10 @@ aktifkan Virtual Environment:
 ```
 source env/bin/activate
 ```
+Install module python yang dibutuhkan:
+```
+pip3 install requirement.txt
+```
 
 ### Run Program
 ```
