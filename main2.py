@@ -77,14 +77,28 @@ dataLenkap = {
     "Memiliki_Mobil": JumlahMobil,
     "Penghasilan": Penghasilan
 }
+dataLenkap2 = {
+    "Status": {
+        0: "Belum Menikah",
+        1: "Nikah",
+        2: "Nikah punya Anak",
+        3: "Duda/Janda",
+    },
+    "Kelamin": {
+        0: "Laki-laki",
+        1: "Perempuan",
+    },
+}
 
 dataLenkap = pd.DataFrame(dataLenkap)
+dataLenkap2 = dataLenkap.replace(dataLenkap2)
+
 print()
 print()
 print(60 * "=")
 print("Daftar Data yang Sudah di Isi")
 print(60 * "=")
-print(dataLenkap)
+print(dataLenkap2)
 # print(dataLenkap.shape)
 # print(type(X_test))
 # print(type(dataLenkap))
